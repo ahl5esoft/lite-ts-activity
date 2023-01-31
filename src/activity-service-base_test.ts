@@ -2,14 +2,14 @@ import { deepStrictEqual } from 'assert';
 
 import { ActivityServiceBase } from './activity-service-base';
 
-class Self extends ActivityServiceBase {
+class Self extends ActivityServiceBase<any> {
     public constructor(
         public closeOn: number,
         public hideOn: number,
         public openOn: number,
         getNowFunc: () => Promise<number>,
     ) {
-        super(getNowFunc);
+        super({}, getNowFunc);
     }
 }
 

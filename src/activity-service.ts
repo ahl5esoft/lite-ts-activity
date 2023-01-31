@@ -5,8 +5,8 @@ import { IUnitOfWork } from './i-unit-of-work';
 import { IValueService } from './i-value-service';
 import { RangeActivityService } from './range-activity-service';
 
-export class ActivityService<T extends IActivity> implements IActivityService {
-    private m_ActivityService: IActivityService;
+export class ActivityService<T extends IActivity> implements IActivityService<T> {
+    private m_ActivityService: IActivityService<any>;
 
     public get closeOn() {
         return this.m_ActivityService.closeOn;
@@ -21,7 +21,7 @@ export class ActivityService<T extends IActivity> implements IActivityService {
     }
 
     public constructor(
-        protected entry: T,
+        public entry: T,
         protected valueService: IValueService,
         getNowFunc: () => Promise<number>,
     ) {

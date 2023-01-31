@@ -1,7 +1,7 @@
 import { ActivityServiceBase } from './activity-service-base';
 import { IRangeActivity } from './i-range-activity';
 
-export class RangeActivityService<T extends IRangeActivity> extends ActivityServiceBase {
+export class RangeActivityService<T extends IRangeActivity> extends ActivityServiceBase<T> {
     public get closeOn() {
         return this.entry.closeOn;
     }
@@ -15,9 +15,9 @@ export class RangeActivityService<T extends IRangeActivity> extends ActivityServ
     }
 
     public constructor(
-        public entry: T,
+        entry: T,
         getNowFunc: () => Promise<number>,
     ) {
-        super(getNowFunc);
+        super(entry, getNowFunc);
     }
 }

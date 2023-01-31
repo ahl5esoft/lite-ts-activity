@@ -1,12 +1,12 @@
 import { deepStrictEqual, strictEqual } from 'assert';
 import { Mock } from 'lite-ts-mock';
 
-import { ActivityService as Self } from './proxy-activity-service';
+import { ActivityService as Self } from './activity-service';
 import { ConditionActivityService } from './condition-activity-service';
 import { IActivityService } from './i-activity-service';
 import { RangeActivityService } from './range-activity-service';
 
-describe('src/proxy-activity-service.ts', () => {
+describe('src/activity-service.ts', () => {
     describe('.closeOn', () => {
         it('ok', () => {
             const self = new Self({
@@ -61,7 +61,7 @@ describe('src/proxy-activity-service.ts', () => {
             const activityService = Reflect.get(self, 'm_ActivityService');
             strictEqual(activityService.constructor, ConditionActivityService);
 
-            const mockActivityService = new Mock<IActivityService>();
+            const mockActivityService = new Mock<IActivityService<any>>();
             Reflect.set(self, 'm_ActivityService', mockActivityService.actual);
 
             mockActivityService.expectReturn(
@@ -81,7 +81,7 @@ describe('src/proxy-activity-service.ts', () => {
             const activityService = Reflect.get(self, 'm_ActivityService');
             strictEqual(activityService.constructor, RangeActivityService);
 
-            const mockActivityService = new Mock<IActivityService>();
+            const mockActivityService = new Mock<IActivityService<any>>();
             Reflect.set(self, 'm_ActivityService', mockActivityService.actual);
 
             mockActivityService.expectReturn(

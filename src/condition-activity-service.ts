@@ -3,17 +3,17 @@ import { IConditionActivity } from './i-condition-activity';
 import { IUnitOfWork } from './i-unit-of-work';
 import { IValueService } from './i-value-service';
 
-export class ConditionActivityService<T extends IConditionActivity> extends ActivityServiceBase {
+export class ConditionActivityService<T extends IConditionActivity> extends ActivityServiceBase<T> {
     public closeOn = 0;
     public hideOn = 0;
     public openOn = 0;
 
     public constructor(
         protected valueService: IValueService,
-        protected entry: T,
+        entry: T,
         getNowFunc: () => Promise<number>,
     ) {
-        super(getNowFunc);
+        super(entry, getNowFunc);
     }
 
     public async getRemainTime(uow: IUnitOfWork) {

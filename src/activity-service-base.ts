@@ -1,7 +1,7 @@
 import { IActivityService } from './i-activity-service';
 import { IUnitOfWork } from './i-unit-of-work';
 
-export abstract class ActivityServiceBase implements IActivityService {
+export abstract class ActivityServiceBase<T> implements IActivityService<T> {
     protected remainTime: [number, number];
 
     public abstract get closeOn(): number;
@@ -9,6 +9,7 @@ export abstract class ActivityServiceBase implements IActivityService {
     public abstract get openOn(): number;
 
     public constructor(
+        public entry: T,
         protected getNowFunc: () => Promise<number>,
     ) { }
 
