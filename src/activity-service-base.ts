@@ -9,7 +9,7 @@ export abstract class ActivityServiceBase<T> implements IActivityService<T> {
     public abstract get openOn(): number;
 
     public constructor(
-        public entry: T,
+        public activity: T,
         protected getNowFunc: () => Promise<number>,
     ) { }
 

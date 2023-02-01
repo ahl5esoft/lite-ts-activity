@@ -4,7 +4,7 @@ export interface IActivityService<T> {
     readonly closeOn: number;
     readonly hideOn: number;
     readonly openOn: number;
-    readonly entry: T;
+    readonly activity: T;
 
     getRemainTime(uow: IUnitOfWork): Promise<[number, number]>;
 }

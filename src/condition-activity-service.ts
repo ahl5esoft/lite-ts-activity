@@ -10,26 +10,26 @@ export class ConditionActivityService<T extends IConditionActivity> extends Acti
 
     public constructor(
         protected valueService: IValueService,
-        entry: T,
+        activity: T,
         getNowFunc: () => Promise<number>,
     ) {
-        super(entry, getNowFunc);
+        super(activity, getNowFunc);
     }
 
     public async getRemainTime(uow: IUnitOfWork) {
         if (!this.remainTime) {
-            let ok = await this.valueService.checkConditions(uow, this.entry.openConditions);
+            let ok = await this.valueService.checkConditions(uow, this.activity.openConditions);
             if (!ok)
                 return;
 
-            ok = await this.valueService.checkConditions(uow, this.entry.closeConditions);
+            ok = await this.valueService.checkConditions(uow, this.activity.closeConditions);
             if (ok)
                 return;
 
-            const beginOn = await this.valueService.getCount(uow, this.entry.contrastValueType);
-            this.closeOn = beginOn + this.entry.closeConditions[0][0].count;
-            this.hideOn = beginOn + this.entry.hideConditions[0][0].count;
-            this.openOn = beginOn + this.entry.openConditions[0][0].count;
+            const beginOn = await this.valueService.getCount(uow, this.activity.contrastValueType);
+            this.closeOn = beginOn + this.activity.closeConditions[0][0].count;
+            this.hideOn = beginOn + this.activity.hideConditions[0][0].count;
+            this.openOn = beginOn + this.activity.openConditions[0][0].count;
         }
 
         return super.getRemainTime(uow);

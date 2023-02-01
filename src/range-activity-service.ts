@@ -3,21 +3,21 @@ import { IRangeActivity } from './i-range-activity';
 
 export class RangeActivityService<T extends IRangeActivity> extends ActivityServiceBase<T> {
     public get closeOn() {
-        return this.entry.closeOn;
+        return this.activity.closeOn;
     }
 
     public get hideOn() {
-        return this.entry.hideOn;
+        return this.activity.hideOn;
     }
 
     public get openOn() {
-        return this.entry.openOn;
+        return this.activity.openOn;
     }
 
     public constructor(
-        entry: T,
+        activity: T,
         getNowFunc: () => Promise<number>,
     ) {
-        super(entry, getNowFunc);
+        super(activity, getNowFunc);
     }
 }

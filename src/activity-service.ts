@@ -21,16 +21,16 @@ export class ActivityService<T extends IActivity> implements IActivityService<T>
     }
 
     public constructor(
-        public entry: T,
+        public activity: T,
         protected valueService: IValueService,
         getNowFunc: () => Promise<number>,
     ) {
-        this.m_ActivityService = entry.condition ? new ConditionActivityService(
+        this.m_ActivityService = activity.condition ? new ConditionActivityService(
             this.valueService,
-            entry.condition,
+            activity.condition,
             getNowFunc,
         ) : new RangeActivityService(
-            entry.range,
+            activity.range,
             getNowFunc,
         );
     }
